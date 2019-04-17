@@ -1,0 +1,689 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1C3B8C322605E95005D8BC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B8C222605E95005D8BC0 /* AppDelegate.swift */; };
+		F1C3B8C522605E95005D8BC0 /* CACamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B8C422605E95005D8BC0 /* CACamViewController.swift */; };
+		F1C3B8C822605E95005D8BC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B8C622605E95005D8BC0 /* Main.storyboard */; };
+		F1C3B8CA22605E97005D8BC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B8C922605E97005D8BC0 /* Assets.xcassets */; };
+		F1C3B8CD22605E97005D8BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B8CB22605E97005D8BC0 /* LaunchScreen.storyboard */; };
+		F1C3B8D822605E97005D8BC0 /* CACamProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B8D722605E97005D8BC0 /* CACamProcessorTests.swift */; };
+		F1C3B8E322605E97005D8BC0 /* CACamProcessorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B8E222605E97005D8BC0 /* CACamProcessorUITests.swift */; };
+		F1C3B8F522605F35005D8BC0 /* CAOpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B8F422605F35005D8BC0 /* CAOpenCVWrapper.mm */; };
+		F1C3B90922606450005D8BC0 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C3B90822606450005D8BC0 /* opencv2.framework */; };
+		F1C3B90E2261DA21005D8BC0 /* CACamPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B90D2261DA21005D8BC0 /* CACamPreview.swift */; };
+		F1C3B912226316EE005D8BC0 /* CAOpenGLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B911226316EE005D8BC0 /* CAOpenGLViewController.swift */; };
+		F1C3B91422631A85005D8BC0 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B91322631A85005D8BC0 /* Vertex.swift */; };
+		F1C3B916226478B5005D8BC0 /* CACamOpenGLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B915226478B5005D8BC0 /* CACamOpenGLViewController.swift */; };
+		F1C3B918226478D8005D8BC0 /* CACamOpenGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B917226478D8005D8BC0 /* CACamOpenGLView.swift */; };
+		F1C3B91D22671551005D8BC0 /* vertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B91C22671551005D8BC0 /* vertexShader.vsh */; };
+		F1C3B91F22671565005D8BC0 /* fragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B91E22671565005D8BC0 /* fragmentShader.fsh */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1C3B8D422605E97005D8BC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1C3B8B722605E95005D8BC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1C3B8BE22605E95005D8BC0;
+			remoteInfo = CACamProcessor;
+		};
+		F1C3B8DF22605E97005D8BC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1C3B8B722605E95005D8BC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1C3B8BE22605E95005D8BC0;
+			remoteInfo = CACamProcessor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F1C3B8BF22605E95005D8BC0 /* CACamProcessor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CACamProcessor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1C3B8C222605E95005D8BC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F1C3B8C422605E95005D8BC0 /* CACamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACamViewController.swift; sourceTree = "<group>"; };
+		F1C3B8C722605E95005D8BC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1C3B8C922605E97005D8BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1C3B8CC22605E97005D8BC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F1C3B8CE22605E97005D8BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1C3B8D322605E97005D8BC0 /* CACamProcessorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CACamProcessorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1C3B8D722605E97005D8BC0 /* CACamProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACamProcessorTests.swift; sourceTree = "<group>"; };
+		F1C3B8D922605E97005D8BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1C3B8DE22605E97005D8BC0 /* CACamProcessorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CACamProcessorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1C3B8E222605E97005D8BC0 /* CACamProcessorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACamProcessorUITests.swift; sourceTree = "<group>"; };
+		F1C3B8E422605E97005D8BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1C3B8F022605EBA005D8BC0 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		F1C3B8F222605F35005D8BC0 /* CACamProcessor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CACamProcessor-Bridging-Header.h"; sourceTree = "<group>"; };
+		F1C3B8F322605F35005D8BC0 /* CAOpenCVWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CAOpenCVWrapper.hpp; sourceTree = "<group>"; };
+		F1C3B8F422605F35005D8BC0 /* CAOpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CAOpenCVWrapper.mm; sourceTree = "<group>"; };
+		F1C3B8F622605F60005D8BC0 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		F1C3B8F8226063AB005D8BC0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F1C3B90822606450005D8BC0 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = SOURCE_ROOT; };
+		F1C3B90D2261DA21005D8BC0 /* CACamPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACamPreview.swift; sourceTree = "<group>"; };
+		F1C3B911226316EE005D8BC0 /* CAOpenGLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAOpenGLViewController.swift; sourceTree = "<group>"; };
+		F1C3B91322631A85005D8BC0 /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		F1C3B915226478B5005D8BC0 /* CACamOpenGLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACamOpenGLViewController.swift; sourceTree = "<group>"; };
+		F1C3B917226478D8005D8BC0 /* CACamOpenGLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACamOpenGLView.swift; sourceTree = "<group>"; };
+		F1C3B91C22671551005D8BC0 /* vertexShader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexShader.vsh; sourceTree = "<group>"; };
+		F1C3B91E22671565005D8BC0 /* fragmentShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragmentShader.fsh; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1C3B8BC22605E95005D8BC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1C3B90922606450005D8BC0 /* opencv2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C3B8D022605E97005D8BC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C3B8DB22605E97005D8BC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1C3B8B622605E95005D8BC0 = {
+			isa = PBXGroup;
+			children = (
+				F1C3B8C122605E95005D8BC0 /* CACamProcessor */,
+				F1C3B8D622605E97005D8BC0 /* CACamProcessorTests */,
+				F1C3B8E122605E97005D8BC0 /* CACamProcessorUITests */,
+				F1C3B8C022605E95005D8BC0 /* Products */,
+				F1C3B8F7226063AA005D8BC0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F1C3B8C022605E95005D8BC0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1C3B8BF22605E95005D8BC0 /* CACamProcessor.app */,
+				F1C3B8D322605E97005D8BC0 /* CACamProcessorTests.xctest */,
+				F1C3B8DE22605E97005D8BC0 /* CACamProcessorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1C3B8C122605E95005D8BC0 /* CACamProcessor */ = {
+			isa = PBXGroup;
+			children = (
+				F1C3B91022631619005D8BC0 /* CAOpenGL */,
+				F1C3B90F226315F6005D8BC0 /* CACam */,
+				F1C3B90822606450005D8BC0 /* opencv2.framework */,
+				F1C3B8C222605E95005D8BC0 /* AppDelegate.swift */,
+				F1C3B8F622605F60005D8BC0 /* PrefixHeader.pch */,
+				F1C3B8C622605E95005D8BC0 /* Main.storyboard */,
+				F1C3B8C922605E97005D8BC0 /* Assets.xcassets */,
+				F1C3B8CB22605E97005D8BC0 /* LaunchScreen.storyboard */,
+				F1C3B8CE22605E97005D8BC0 /* Info.plist */,
+				F1C3B8F222605F35005D8BC0 /* CACamProcessor-Bridging-Header.h */,
+			);
+			path = CACamProcessor;
+			sourceTree = "<group>";
+		};
+		F1C3B8D622605E97005D8BC0 /* CACamProcessorTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1C3B8D722605E97005D8BC0 /* CACamProcessorTests.swift */,
+				F1C3B8D922605E97005D8BC0 /* Info.plist */,
+			);
+			path = CACamProcessorTests;
+			sourceTree = "<group>";
+		};
+		F1C3B8E122605E97005D8BC0 /* CACamProcessorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F1C3B8E222605E97005D8BC0 /* CACamProcessorUITests.swift */,
+				F1C3B8E422605E97005D8BC0 /* Info.plist */,
+			);
+			path = CACamProcessorUITests;
+			sourceTree = "<group>";
+		};
+		F1C3B8F7226063AA005D8BC0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1C3B8F022605EBA005D8BC0 /* opencv2.framework */,
+				F1C3B8F8226063AB005D8BC0 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1C3B90F226315F6005D8BC0 /* CACam */ = {
+			isa = PBXGroup;
+			children = (
+				F1C3B8C422605E95005D8BC0 /* CACamViewController.swift */,
+				F1C3B915226478B5005D8BC0 /* CACamOpenGLViewController.swift */,
+				F1C3B917226478D8005D8BC0 /* CACamOpenGLView.swift */,
+				F1C3B90D2261DA21005D8BC0 /* CACamPreview.swift */,
+				F1C3B8F322605F35005D8BC0 /* CAOpenCVWrapper.hpp */,
+				F1C3B8F422605F35005D8BC0 /* CAOpenCVWrapper.mm */,
+			);
+			path = CACam;
+			sourceTree = "<group>";
+		};
+		F1C3B91022631619005D8BC0 /* CAOpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				F1C3B911226316EE005D8BC0 /* CAOpenGLViewController.swift */,
+				F1C3B91C22671551005D8BC0 /* vertexShader.vsh */,
+				F1C3B91E22671565005D8BC0 /* fragmentShader.fsh */,
+				F1C3B91322631A85005D8BC0 /* Vertex.swift */,
+			);
+			path = CAOpenGL;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1C3B8BE22605E95005D8BC0 /* CACamProcessor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1C3B8E722605E97005D8BC0 /* Build configuration list for PBXNativeTarget "CACamProcessor" */;
+			buildPhases = (
+				F1C3B8BB22605E95005D8BC0 /* Sources */,
+				F1C3B8BC22605E95005D8BC0 /* Frameworks */,
+				F1C3B8BD22605E95005D8BC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CACamProcessor;
+			productName = CACamProcessor;
+			productReference = F1C3B8BF22605E95005D8BC0 /* CACamProcessor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1C3B8D222605E97005D8BC0 /* CACamProcessorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1C3B8EA22605E97005D8BC0 /* Build configuration list for PBXNativeTarget "CACamProcessorTests" */;
+			buildPhases = (
+				F1C3B8CF22605E97005D8BC0 /* Sources */,
+				F1C3B8D022605E97005D8BC0 /* Frameworks */,
+				F1C3B8D122605E97005D8BC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1C3B8D522605E97005D8BC0 /* PBXTargetDependency */,
+			);
+			name = CACamProcessorTests;
+			productName = CACamProcessorTests;
+			productReference = F1C3B8D322605E97005D8BC0 /* CACamProcessorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F1C3B8DD22605E97005D8BC0 /* CACamProcessorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1C3B8ED22605E97005D8BC0 /* Build configuration list for PBXNativeTarget "CACamProcessorUITests" */;
+			buildPhases = (
+				F1C3B8DA22605E97005D8BC0 /* Sources */,
+				F1C3B8DB22605E97005D8BC0 /* Frameworks */,
+				F1C3B8DC22605E97005D8BC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1C3B8E022605E97005D8BC0 /* PBXTargetDependency */,
+			);
+			name = CACamProcessorUITests;
+			productName = CACamProcessorUITests;
+			productReference = F1C3B8DE22605E97005D8BC0 /* CACamProcessorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1C3B8B722605E95005D8BC0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Carol;
+				TargetAttributes = {
+					F1C3B8BE22605E95005D8BC0 = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
+					};
+					F1C3B8D222605E97005D8BC0 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = F1C3B8BE22605E95005D8BC0;
+					};
+					F1C3B8DD22605E97005D8BC0 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = F1C3B8BE22605E95005D8BC0;
+					};
+				};
+			};
+			buildConfigurationList = F1C3B8BA22605E95005D8BC0 /* Build configuration list for PBXProject "CACamProcessor" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1C3B8B622605E95005D8BC0;
+			productRefGroup = F1C3B8C022605E95005D8BC0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1C3B8BE22605E95005D8BC0 /* CACamProcessor */,
+				F1C3B8D222605E97005D8BC0 /* CACamProcessorTests */,
+				F1C3B8DD22605E97005D8BC0 /* CACamProcessorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1C3B8BD22605E95005D8BC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1C3B8CD22605E97005D8BC0 /* LaunchScreen.storyboard in Resources */,
+				F1C3B91F22671565005D8BC0 /* fragmentShader.fsh in Resources */,
+				F1C3B91D22671551005D8BC0 /* vertexShader.vsh in Resources */,
+				F1C3B8CA22605E97005D8BC0 /* Assets.xcassets in Resources */,
+				F1C3B8C822605E95005D8BC0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C3B8D122605E97005D8BC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C3B8DC22605E97005D8BC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1C3B8BB22605E95005D8BC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1C3B90E2261DA21005D8BC0 /* CACamPreview.swift in Sources */,
+				F1C3B8C522605E95005D8BC0 /* CACamViewController.swift in Sources */,
+				F1C3B916226478B5005D8BC0 /* CACamOpenGLViewController.swift in Sources */,
+				F1C3B8F522605F35005D8BC0 /* CAOpenCVWrapper.mm in Sources */,
+				F1C3B912226316EE005D8BC0 /* CAOpenGLViewController.swift in Sources */,
+				F1C3B918226478D8005D8BC0 /* CACamOpenGLView.swift in Sources */,
+				F1C3B8C322605E95005D8BC0 /* AppDelegate.swift in Sources */,
+				F1C3B91422631A85005D8BC0 /* Vertex.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C3B8CF22605E97005D8BC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1C3B8D822605E97005D8BC0 /* CACamProcessorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C3B8DA22605E97005D8BC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1C3B8E322605E97005D8BC0 /* CACamProcessorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1C3B8D522605E97005D8BC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1C3B8BE22605E95005D8BC0 /* CACamProcessor */;
+			targetProxy = F1C3B8D422605E97005D8BC0 /* PBXContainerItemProxy */;
+		};
+		F1C3B8E022605E97005D8BC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1C3B8BE22605E95005D8BC0 /* CACamProcessor */;
+			targetProxy = F1C3B8DF22605E97005D8BC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1C3B8C622605E95005D8BC0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1C3B8C722605E95005D8BC0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F1C3B8CB22605E97005D8BC0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1C3B8CC22605E97005D8BC0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1C3B8E522605E97005D8BC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F1C3B8E622605E97005D8BC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F1C3B8E822605E97005D8BC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LHHY239973;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/CACamProcessor/opencv2.framework",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CACamProcessor/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/CACamProcessor/",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CACamProcessor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CA.LightFreq;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CACamProcessor/CACamProcessor-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F1C3B8E922605E97005D8BC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LHHY239973;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/CACamProcessor/opencv2.framework",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CACamProcessor/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/CACamProcessor/",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CACamProcessor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CA.LightFreq;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CACamProcessor/CACamProcessor-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F1C3B8EB22605E97005D8BC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LHHY239973;
+				INFOPLIST_FILE = CACamProcessorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CA.CACamProcessorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CACamProcessor.app/CACamProcessor";
+			};
+			name = Debug;
+		};
+		F1C3B8EC22605E97005D8BC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LHHY239973;
+				INFOPLIST_FILE = CACamProcessorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CA.CACamProcessorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CACamProcessor.app/CACamProcessor";
+			};
+			name = Release;
+		};
+		F1C3B8EE22605E97005D8BC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LHHY239973;
+				INFOPLIST_FILE = CACamProcessorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CA.CACamProcessorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CACamProcessor;
+			};
+			name = Debug;
+		};
+		F1C3B8EF22605E97005D8BC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LHHY239973;
+				INFOPLIST_FILE = CACamProcessorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CA.CACamProcessorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CACamProcessor;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1C3B8BA22605E95005D8BC0 /* Build configuration list for PBXProject "CACamProcessor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1C3B8E522605E97005D8BC0 /* Debug */,
+				F1C3B8E622605E97005D8BC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1C3B8E722605E97005D8BC0 /* Build configuration list for PBXNativeTarget "CACamProcessor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1C3B8E822605E97005D8BC0 /* Debug */,
+				F1C3B8E922605E97005D8BC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1C3B8EA22605E97005D8BC0 /* Build configuration list for PBXNativeTarget "CACamProcessorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1C3B8EB22605E97005D8BC0 /* Debug */,
+				F1C3B8EC22605E97005D8BC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1C3B8ED22605E97005D8BC0 /* Build configuration list for PBXNativeTarget "CACamProcessorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1C3B8EE22605E97005D8BC0 /* Debug */,
+				F1C3B8EF22605E97005D8BC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1C3B8B722605E95005D8BC0 /* Project object */;
+}
