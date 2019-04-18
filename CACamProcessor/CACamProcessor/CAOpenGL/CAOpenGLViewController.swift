@@ -34,7 +34,7 @@ class CAOpenGLViewController: GLKViewController {
         Vertex(x:  0.5, y: -0.5, z: 0, r: 1, g: 0, b: 0, a: 1),
         Vertex(x:  0.5, y:  0.5, z: 0, r: 0, g: 1, b: 0, a: 1),
         Vertex(x: -0.5, y:  0.5, z: 0, r: 0, g: 0, b: 1, a: 1),
-//        Vertex(x: -0.5, y: -0.5, z: 0, r: 0, g: 0, b: 0, a: 1),
+        Vertex(x: -0.5, y: -0.5, z: 0, r: 0, g: 0, b: 0, a: 1),
     ]
     
     var squareVertexData: [GLfloat] = [
@@ -128,9 +128,13 @@ class CAOpenGLViewController: GLKViewController {
         let colorOffsetPointer = UnsafeRawPointer(bitPattern: 3*MemoryLayout<GLfloat>.stride)
         glVertexAttribPointer(GLuint(GLKVertexAttrib.color.rawValue), 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(vertexStride), colorOffsetPointer)
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.color.rawValue))
-//        setupShader()
+        
+        // Index
+        glGenBuffers(1, &ebo)
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), ebo)
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), squareIndices.size(), squareIndices, GLenum(GL_STATIC_DRAW))
+        
     }
-    
     
     func setupShader() {
         vertexShader = glCreateShader(GLenum(GL_VERTEX_SHADER))
@@ -176,6 +180,10 @@ class CAOpenGLViewController: GLKViewController {
         glDeleteShader(vertexShader)
         glDeleteShader(fragmentShader)
     
+    }
+    
+    func projection() {
+        
     }
     
     func renderArrow() {
@@ -257,7 +265,8 @@ class CAOpenGLViewController: GLKViewController {
         effect.prepareToDraw()
 //        glUseProgram(shaderProgram)
         glBindVertexArray(vao)
-        glDrawArrays(GLenum(GL_TRIANGLES), 0, 3)
+//        glDrawArrays(GLenum(GL_TRIANGLES), 0, 3) // 根据顶点数据渲染
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(squareIndices.size()), GLenum(GL_UNSIGNED_BYTE), nil) // 根据 索引渲染
     }
 }
 
