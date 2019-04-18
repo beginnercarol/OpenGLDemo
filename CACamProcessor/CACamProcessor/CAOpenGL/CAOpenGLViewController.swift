@@ -28,6 +28,7 @@ class CAOpenGLViewController: GLKViewController {
     
     private var vertexShader = GLuint()
     private var fragmentShader = GLuint()
+    private var shaderProgram = GLuint()
     
     var Vertices = [
         Vertex(x:  0.5, y: -0.5, z: 0, r: 1, g: 0, b: 0, a: 1),
@@ -105,15 +106,14 @@ class CAOpenGLViewController: GLKViewController {
             view.context = context
             delegate = self
         }
+        helloTriangle()
     }
     
     func helloTriangle() {
         glGenBuffers(1, &vbo)
         
         let vertexStride = MemoryLayout<GLfloat>.stride
-        
-//        glGenBuffers(1, &ebo)
-//        glBindBuffer(Glenum(GL_), <#T##buffer: GLuint##GLuint#>)
+
         glGenVertexArraysOES(1, &vao)
         glBindVertexArrayOES(vao)
         
@@ -123,33 +123,44 @@ class CAOpenGLViewController: GLKViewController {
         glVertexAttribPointer(0, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(3 * vertexStride), nil)
         glEnableVertexAttribArray(0)
         
-        
+        setupShader()
         
     }
     
     
     func setupShader() {
         vertexShader = glCreateShader(GLenum(GL_VERTEX_SHADER))
-        guard let vertexShaderPath = Bundle.main.path(forResource: "vertexShader", ofType: "glsl"), let fragmentShaderPath = Bundle.main.path(forResource: "fragmentShader", ofType: "glsl") else {
+        fragmentShader = glCreateShader(GLenum(GL_FRAGMENT_SHADER))
+        
+        guard let vertexShaderPath = Bundle.main.path(forResource: "vertexShader", ofType: "vsh"), let fragmentShaderPath = Bundle.main.path(forResource: "fragmentShader", ofType: "fsh") else {
             NSLog("Load vertexShader failed")
             return
         }
-        
         do {
             let vertexShaderString = try String(contentsOfFile: vertexShaderPath)
-            let vertexShaderStringPointer = UnsafeRawPointer(vertexShaderString)
-            glShaderSource(vertexShader, 1, &vertexShaderStringPointer, NULL)
-//            if var vertexShaderString = try? String(contentsOfFile: vertexShaderPath) {
-//                glShaderSource(vertexShader, 1, &vertexShaderString, NULL)
-//                glCompileShader(vertexShader)
-//                var
-//            }
+            var vertexShaderPointer = (vertexShaderString as NSString).utf8String
+
+            glShaderSource(vertexShader, 1, &vertexShaderPointer, nil)
+            glCompileShader(vertexShader)
+            var vertxShaderSuccess = GLint()
+            glGetShaderiv(vertexShader, GLenum(GL_COMPILE_STATUS), &vertxShaderSuccess)
             
-            
+            let fragmentShaderString = try String(contentsOfFile: fragmentShaderPath)
+            var fragmentShaderPointer = (fragmentShaderString as NSString).utf8String
+            glShaderSource(fragmentShader, 1, &fragmentShaderPointer, nil)
+            glCompileShader(fragmentShader)
         } catch let err {
             NSLog("Convert vertex Shader failed")
         }
         
+        shaderProgram = glCreateProgram()
+        glAttachShader(shaderProgram, vertexShader)
+        glAttachShader(shaderProgram, fragmentShader)
+        glLinkProgram(shaderProgram)
+        
+        glDeleteShader(vertexShader)
+        glDeleteShader(fragmentShader)
+    
     }
     
     func renderArrow() {
@@ -208,7 +219,7 @@ class CAOpenGLViewController: GLKViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGL()
-        uploadTexture()
+//        uploadTexture()
         addObservers()
     }
     
@@ -231,25 +242,15 @@ class CAOpenGLViewController: GLKViewController {
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
         glClearColor(0.85, 0.85, 0.85, 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-        effect.prepareToDraw()
-        glBindBuffer(GLenum(GL_ARRAY_BUFFER), buffer)
-//        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), ebo)
-        glDrawArrays(GLenum(GL_TRIANGLES), 0, 12)
-//        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(squareDoubleIndices.count), GLenum(GL_UNSIGNED_BYTE), nil)
-//        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count), GLenum(GL_UNSIGNED_BYTE), nil)
-//        glBindVertexArrayOES(0)
+        glUseProgram(shaderProgram)
+        glBindVertexArray(vao)
+        glDrawArrays(GLenum(GL_TRIANGLES), 0, 3)
     }
 }
 
 extension CAOpenGLViewController: GLKViewControllerDelegate {
     
     func glkViewControllerUpdate(_ controller: GLKViewController) {
-//        let aspect = fabsf(Float(view.bounds.width)/Float(view.bounds.height))
-//        let projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0), aspect, 4.0, 10.0)
-//        effect.transform.projectionMatrix = projectionMatrix
-//        var modelViewMatrix = GLKMatrix4MakeTranslation(0.0, 0.0, -6.0)
-//        rotation += 90*Float(timeSinceLastUpdate)
-//        modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(rotation), 0, 0, 1)
-//        effect.transform.modelviewMatrix = modelViewMatrix
+
     }
 }
