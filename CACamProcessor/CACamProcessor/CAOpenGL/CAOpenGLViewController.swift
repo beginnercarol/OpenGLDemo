@@ -106,13 +106,15 @@ class CAOpenGLViewController: GLKViewController {
             view.context = context
             delegate = self
         }
+        effect = GLKBaseEffect()
         helloTriangle()
     }
     
     func helloTriangle() {
         glGenBuffers(1, &vbo)
         
-        let vertexStride = MemoryLayout<GLfloat>.stride
+        let vertexStride = MemoryLayout<Vertex>.stride
+        
 
         glGenVertexArraysOES(1, &vao)
         glBindVertexArrayOES(vao)
@@ -120,11 +122,13 @@ class CAOpenGLViewController: GLKViewController {
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), vbo)
         glBufferData(GLenum(GL_ARRAY_BUFFER), Vertices.size(), Vertices, GLenum(GL_STATIC_DRAW))
         
-        glVertexAttribPointer(0, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(3 * vertexStride), nil)
-        glEnableVertexAttribArray(0)
+        glVertexAttribPointer(GLuint(GLKVertexAttrib.position.rawValue), 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(vertexStride), nil)
+        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.position.rawValue))
         
-        setupShader()
-        
+        let colorOffsetPointer = UnsafeRawPointer(bitPattern: 3*MemoryLayout<GLfloat>.stride)
+        glVertexAttribPointer(GLuint(GLKVertexAttrib.color.rawValue), 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(vertexStride), colorOffsetPointer)
+        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.color.rawValue))
+//        setupShader()
     }
     
     
@@ -137,13 +141,24 @@ class CAOpenGLViewController: GLKViewController {
             return
         }
         do {
+            // load shader
             let vertexShaderString = try String(contentsOfFile: vertexShaderPath)
             var vertexShaderPointer = (vertexShaderString as NSString).utf8String
-
-            glShaderSource(vertexShader, 1, &vertexShaderPointer, nil)
+            var vertexShaderCstring = String.init(cString: vertexShaderPointer!)
+            var vertexShaderLength = GLint(vertexShaderString.count)
+            
+            
+            glShaderSource(vertexShader, 1, &vertexShaderPointer, &vertexShaderLength)
             glCompileShader(vertexShader)
             var vertxShaderSuccess = GLint()
             glGetShaderiv(vertexShader, GLenum(GL_COMPILE_STATUS), &vertxShaderSuccess)
+            
+            // cChar数组
+            var infoLog = [CChar](repeating: CChar(0), count: 256)
+            glGetShaderInfoLog(vertexShader, 512, nil, &infoLog)
+            let message = String.init(utf8String: infoLog)
+            NSLog("glGetShaderInfoLog: \(message)")
+
             
             let fragmentShaderString = try String(contentsOfFile: fragmentShaderPath)
             var fragmentShaderPointer = (fragmentShaderString as NSString).utf8String
@@ -187,7 +202,6 @@ class CAOpenGLViewController: GLKViewController {
     }
     
     func uploadTexture() {
-//        let path = Bundle.main.path(forResource: "food", ofType: "jpg")
         if let img = UIImage(named: "food"), let cgImg = img.cgImage{
             if let textureInfo = try? GLKTextureLoader.texture(with: cgImg, options: nil) {
                 effect.texture2d0.enabled = GLboolean(GL_TRUE)
@@ -201,7 +215,6 @@ class CAOpenGLViewController: GLKViewController {
         glDeleteBuffers(1, &vao)
         glDeleteBuffers(1, &vbo)
         glDeleteBuffers(1, &ebo)
-        
         EAGLContext.setCurrent(nil)
         context = nil
     }
@@ -214,13 +227,12 @@ class CAOpenGLViewController: GLKViewController {
         return true
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addObservers()
         setupGL()
 //        uploadTexture()
-        addObservers()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -242,7 +254,8 @@ class CAOpenGLViewController: GLKViewController {
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
         glClearColor(0.85, 0.85, 0.85, 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-        glUseProgram(shaderProgram)
+        effect.prepareToDraw()
+//        glUseProgram(shaderProgram)
         glBindVertexArray(vao)
         glDrawArrays(GLenum(GL_TRIANGLES), 0, 3)
     }
