@@ -31,12 +31,18 @@ class CAOpenGLViewController: GLKViewController {
     private var shaderProgram = GLuint()
     
     var Vertices = [
-        Vertex(x:  0.5, y: -0.5, z: 0, r: 1, g: 0, b: 0, a: 1),
-        Vertex(x:  0.5, y:  0.5, z: 0, r: 0, g: 1, b: 0, a: 1),
-        Vertex(x: -0.5, y:  0.5, z: 0, r: 0, g: 0, b: 1, a: 1),
-        Vertex(x: -0.5, y: -0.5, z: 0, r: 0, g: 0, b: 0, a: 1),
+        Vertex(x:  0.5, y: -0.5, z: 0, r: 1, g: 0, b: 0, a: 1, textureX: 1.0, textureY: 0.0),
+        Vertex(x:  0.5, y:  0.5, z: 0, r: 0, g: 1, b: 0, a: 1, textureX: 1.0, textureY: 1.0),
+        Vertex(x: -0.5, y:  0.5, z: 0, r: 0, g: 0, b: 1, a: 1, textureX: 0.0, textureY: 1.0),
+        Vertex(x: -0.5, y: -0.5, z: 0, r: 0, g: 0, b: 0, a: 1, textureX: 0.0, textureY: 0.0),
     ]
     
+    var squareIndices: [GLubyte] = [
+        0, 1, 2,
+        0, 2, 3
+    ]
+    
+
     var squareVertexData: [GLfloat] = [
         0.5, -0.5, 0.0, 1.0, 0.0,
         0.5, 0.5, -0.0, 1.0, 1.0,
@@ -47,10 +53,7 @@ class CAOpenGLViewController: GLKViewController {
 //        -0.5, -0.5, 0.0, 0.0, 0.0
     ]
     
-    var squareIndices: [GLubyte] = [
-        0, 1, 2,
-        0, 2, 3
-    ]
+    
     
     var squareVertexDoubleData: [GLfloat] = [
         0.5, -0.5, 0.0, 1.0, 0.0,
@@ -133,6 +136,12 @@ class CAOpenGLViewController: GLKViewController {
         glGenBuffers(1, &ebo)
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), ebo)
         glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), squareIndices.size(), squareIndices, GLenum(GL_STATIC_DRAW))
+        
+        // texture pos
+        let textureOffsetPointer = UnsafeRawPointer(bitPattern: 7*MemoryLayout<GLfloat>.stride)
+        glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue), 2, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(vertexStride), textureOffsetPointer)
+        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
+        
         
     }
     
@@ -239,13 +248,15 @@ class CAOpenGLViewController: GLKViewController {
         super.viewDidLoad()
         addObservers()
         setupGL()
-//        uploadTexture()
+        uploadTexture()
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         removeObservers()
     }
+    
+    
     
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(deviceRotate(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)

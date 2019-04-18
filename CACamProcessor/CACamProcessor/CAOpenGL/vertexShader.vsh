@@ -1,5 +1,14 @@
-in vec3 aPos;
+attribute vec4 position;
+attribute vec2 textCoordinate;
+uniform mat4 rotateMatrix;
+varying lowp vec2 varyTextCoord;
+
+
 
 void main() {
-    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+    varytextCoord = textCoordinate;
+    vec4 vPos = position;
+    vPos = vPos * rotateMatrix;
+    
+    gl_Position = vPos;
 }

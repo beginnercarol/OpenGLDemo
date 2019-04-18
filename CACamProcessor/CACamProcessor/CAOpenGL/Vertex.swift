@@ -16,4 +16,6 @@ struct Vertex {
     var g: GLfloat
     var b: GLfloat
     var a: GLfloat
+    var textureX: GLfloat
+    var textureY: GLfloat
 }

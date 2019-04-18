@@ -1,5 +1,6 @@
-out vec4 FragColor;
-
-void main() {
-    FragColor = vec4(1.0, 0.5, 0.1, 1.0);
+varying lowp vec2 varyTextCoord;
+uniform sampler2D colorMap;
+void main()
+{
+    gl_FragColor = texture2D(colorMap, varyTextCoord);
 }
