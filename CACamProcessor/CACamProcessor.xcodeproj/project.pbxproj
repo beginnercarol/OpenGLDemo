@@ -23,6 +23,9 @@
 		F1C3B918226478D8005D8BC0 /* CACamOpenGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B917226478D8005D8BC0 /* CACamOpenGLView.swift */; };
 		F1C3B91D22671551005D8BC0 /* vertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B91C22671551005D8BC0 /* vertexShader.vsh */; };
 		F1C3B91F22671565005D8BC0 /* fragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B91E22671565005D8BC0 /* fragmentShader.fsh */; };
+		F1C3B9212269A939005D8BC0 /* CA0419ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B9202269A939005D8BC0 /* CA0419ViewController.swift */; };
+		F1C3B9242269A9F4005D8BC0 /* CAGLKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B9232269A9F4005D8BC0 /* CAGLKView.swift */; };
+		F1C3B926226AFD24005D8BC0 /* CAVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B925226AFD24005D8BC0 /* CAVertex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		F1C3B917226478D8005D8BC0 /* CACamOpenGLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CACamOpenGLView.swift; sourceTree = "<group>"; };
 		F1C3B91C22671551005D8BC0 /* vertexShader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexShader.vsh; sourceTree = "<group>"; };
 		F1C3B91E22671565005D8BC0 /* fragmentShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragmentShader.fsh; sourceTree = "<group>"; };
+		F1C3B9202269A939005D8BC0 /* CA0419ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CA0419ViewController.swift; sourceTree = "<group>"; };
+		F1C3B9232269A9F4005D8BC0 /* CAGLKView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAGLKView.swift; sourceTree = "<group>"; };
+		F1C3B925226AFD24005D8BC0 /* CAVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAVertex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 		F1C3B8C122605E95005D8BC0 /* CACamProcessor */ = {
 			isa = PBXGroup;
 			children = (
+				F1C3B9222269A943005D8BC0 /* CA0419OpenGLDemo */,
 				F1C3B91022631619005D8BC0 /* CAOpenGL */,
 				F1C3B90F226315F6005D8BC0 /* CACam */,
 				F1C3B90822606450005D8BC0 /* opencv2.framework */,
@@ -185,6 +192,16 @@
 				F1C3B91322631A85005D8BC0 /* Vertex.swift */,
 			);
 			path = CAOpenGL;
+			sourceTree = "<group>";
+		};
+		F1C3B9222269A943005D8BC0 /* CA0419OpenGLDemo */ = {
+			isa = PBXGroup;
+			children = (
+				F1C3B9202269A939005D8BC0 /* CA0419ViewController.swift */,
+				F1C3B9232269A9F4005D8BC0 /* CAGLKView.swift */,
+				F1C3B925226AFD24005D8BC0 /* CAVertex.swift */,
+			);
+			path = CA0419OpenGLDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,8 +341,11 @@
 				F1C3B90E2261DA21005D8BC0 /* CACamPreview.swift in Sources */,
 				F1C3B8C522605E95005D8BC0 /* CACamViewController.swift in Sources */,
 				F1C3B916226478B5005D8BC0 /* CACamOpenGLViewController.swift in Sources */,
+				F1C3B9242269A9F4005D8BC0 /* CAGLKView.swift in Sources */,
 				F1C3B8F522605F35005D8BC0 /* CAOpenCVWrapper.mm in Sources */,
+				F1C3B9212269A939005D8BC0 /* CA0419ViewController.swift in Sources */,
 				F1C3B912226316EE005D8BC0 /* CAOpenGLViewController.swift in Sources */,
+				F1C3B926226AFD24005D8BC0 /* CAVertex.swift in Sources */,
 				F1C3B918226478D8005D8BC0 /* CACamOpenGLView.swift in Sources */,
 				F1C3B8C322605E95005D8BC0 /* AppDelegate.swift in Sources */,
 				F1C3B91422631A85005D8BC0 /* Vertex.swift in Sources */,

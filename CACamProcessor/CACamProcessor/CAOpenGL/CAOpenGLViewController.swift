@@ -8,6 +8,8 @@
 
 
 import GLKit
+import CoreGraphics
+
 extension Array {
     func size() -> Int {
         return MemoryLayout<Element>.stride * self.count
@@ -25,6 +27,8 @@ class CAOpenGLViewController: GLKViewController {
     private var vbo = GLuint()
     private var vao = GLuint()
     private var buffer = GLuint()
+    private var renderBuffer = GLuint()
+    private var frameBuffer = GLuint()
     
     private var vertexShader = GLuint()
     private var fragmentShader = GLuint()
@@ -110,8 +114,32 @@ class CAOpenGLViewController: GLKViewController {
             delegate = self
         }
         effect = GLKBaseEffect()
+        
+        setupRenderBuffer()
+        setupFrameBuffer()
         helloTriangle()
+        
+        
     }
+    
+    func setupRenderBuffer() {
+        var buffer = GLuint()
+        glGenRenderbuffers(1, &buffer)
+        glBindRenderbuffer(GLenum(GL_RENDERBUFFER), buffer)
+        self.renderBuffer = buffer
+        self.context?.renderbufferStorage(Int(GL_RENDERBUFFER), from: self.eaglLayer)
+    }
+    
+    func setupFrameBuffer() {
+        var buffer = GLuint()
+        glGenFramebuffers(1, &buffer)
+        glBindFramebuffer(GLenum(GL_FRAMEBUFFER), buffer)
+        self.frameBuffer = buffer
+        glFramebufferRenderbuffer(GLenum(GL_FRAMEBUFFER), GLenum(GL_COLOR_ATTACHMENT0), GLenum(GL_RENDERBUFFER), self.frameBuffer)
+    }
+    
+    
+    
     
     func helloTriangle() {
         glGenBuffers(1, &vbo)
@@ -142,53 +170,101 @@ class CAOpenGLViewController: GLKViewController {
         glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue), 2, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(vertexStride), textureOffsetPointer)
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
         
-        
-    }
-    
-    func setupShader() {
-        vertexShader = glCreateShader(GLenum(GL_VERTEX_SHADER))
-        fragmentShader = glCreateShader(GLenum(GL_FRAGMENT_SHADER))
-        
         guard let vertexShaderPath = Bundle.main.path(forResource: "vertexShader", ofType: "vsh"), let fragmentShaderPath = Bundle.main.path(forResource: "fragmentShader", ofType: "fsh") else {
             NSLog("Load vertexShader failed")
             return
         }
-        do {
-            // load shader
-            let vertexShaderString = try String(contentsOfFile: vertexShaderPath)
-            var vertexShaderPointer = (vertexShaderString as NSString).utf8String
-            var vertexShaderCstring = String.init(cString: vertexShaderPointer!)
-            var vertexShaderLength = GLint(vertexShaderString.count)
-            
-            
-            glShaderSource(vertexShader, 1, &vertexShaderPointer, &vertexShaderLength)
-            glCompileShader(vertexShader)
-            var vertxShaderSuccess = GLint()
-            glGetShaderiv(vertexShader, GLenum(GL_COMPILE_STATUS), &vertxShaderSuccess)
-            
-            // cChar数组
-            var infoLog = [CChar](repeating: CChar(0), count: 256)
-            glGetShaderInfoLog(vertexShader, 512, nil, &infoLog)
-            let message = String.init(utf8String: infoLog)
-            NSLog("glGetShaderInfoLog: \(message)")
+        
+        self.shaderProgram = self.loadShaders(vertexShaderPath, andFrag: fragmentShaderPath)
+        
+        uploadTexure(imageName: "food")
+        
+        // 设置 vertex shader, 获取设定的全局(uniform)属性
+        var rotate = glGetUniformLocation(self.shaderProgram, "rotateMatrix")
+        
+        let radians: GLfloat = 10 * 3.14159 / 180.0
+        let sinAng: GLfloat = sin(radians)
+        let cosAng: GLfloat = cos(radians)
+        
+        let zRotation: [GLfloat] = [
+            cosAng, -sinAng, 0, 0.2,
+            sinAng, cosAng, 0, 0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0,
+        ]
+        
+        var rotationSize = GLfloat(zRotation.size())
+        
+        glUniformMatrix4fv(rotate, 1, GLboolean(GL_FALSE), &rotationSize)
 
-            
-            let fragmentShaderString = try String(contentsOfFile: fragmentShaderPath)
-            var fragmentShaderPointer = (fragmentShaderString as NSString).utf8String
-            glShaderSource(fragmentShader, 1, &fragmentShaderPointer, nil)
-            glCompileShader(fragmentShader)
-        } catch let err {
-            NSLog("Convert vertex Shader failed")
+    }
+    
+    func uploadTexure(imageName name: String) {
+        guard let img = UIImage(named: name)?.cgImage else {
+            NSLog("Loading img failed")
+            return
         }
         
-        shaderProgram = glCreateProgram()
+        let sizeWidth: Int = img.width
+        let sizeHeight: Int = img.height
+        
+    
+        var spriteData = [GLubyte](repeating: 0, count: sizeWidth*sizeHeight)
+        
+        var bitmap = CGContext.init(data: &spriteData, width: sizeWidth, height: sizeHeight, bitsPerComponent: 8, bytesPerRow: sizeWidth*4, space: img.colorSpace!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+        
+        bitmap!.draw(img, in: CGRect(x: 0, y: 0, width: sizeWidth, height: sizeHeight))
+        
+        // why 0?
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), 0)
+        
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
+        
+        glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GLint(GL_RGBA), GLsizei(sizeWidth), GLsizei(sizeHeight), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), spriteData)
+    }
+    
+    func loadShaders(_ vertex: String, andFrag frag: String?) -> GLuint {
+        vertexShader = glCreateShader(GLenum(GL_VERTEX_SHADER))
+        fragmentShader = glCreateShader(GLenum(GL_FRAGMENT_SHADER))
+        
+        compileShader(vertexShader, type: GLenum(GL_VERTEX_SHADER), file: (vertex as NSString))
+        if frag != nil {
+            compileShader(fragmentShader, type: GLenum(GL_FRAGMENT_SHADER), file: (frag as! NSString))
+        }
+        
+        var program = glCreateProgram()
         glAttachShader(shaderProgram, vertexShader)
         glAttachShader(shaderProgram, fragmentShader)
         glLinkProgram(shaderProgram)
         
         glDeleteShader(vertexShader)
         glDeleteShader(fragmentShader)
+        return program
+    }
     
+    func compileShader(_ shader: GLuint, type: GLenum, file: NSString) {
+        do {
+            let content = try String(contentsOfFile: file as String)
+            var contentPointer = (content as NSString).utf8String
+            var contentLenght = GLint(content.count)
+            glShaderSource(shader, 1, &contentPointer, &contentLenght)
+            glCompileShader(shader)
+        } catch let err {
+            NSLog("Shader open failed")
+        }
+        var shaderSuccess = GLint()
+        glGetShaderiv(shader, GLenum(GL_COMPILE_STATUS), &shaderSuccess)
+        if shaderSuccess == GL_FALSE {
+            var infoLog = [CChar](repeating: CChar(0), count: 256)
+            glGetShaderInfoLog(shader, 512, nil, &infoLog)
+            let message = String.init(utf8String: infoLog)
+            NSLog("glGetShaderInfoLog: \(message)")
+        }
+        
     }
     
     func projection() {
@@ -209,7 +285,6 @@ class CAOpenGLViewController: GLKViewController {
         ), GLenum(GL_RENDERBUFFER_OES), renderbuffer)
         
         glViewport(0, 0, GLsizei(view.frame.width), GLsizei(view.frame.height))
-        
     }
     
     func drawView() {
@@ -218,6 +293,7 @@ class CAOpenGLViewController: GLKViewController {
         self.context?.presentRenderbuffer(Int(GL_RENDERBUFFER_OES))
     }
     
+    // 
     func uploadTexture() {
         if let img = UIImage(named: "food"), let cgImg = img.cgImage{
             if let textureInfo = try? GLKTextureLoader.texture(with: cgImg, options: nil) {
@@ -249,7 +325,6 @@ class CAOpenGLViewController: GLKViewController {
         addObservers()
         setupGL()
         uploadTexture()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

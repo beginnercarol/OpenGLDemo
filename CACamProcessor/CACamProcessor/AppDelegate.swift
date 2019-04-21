@@ -20,10 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let camVC = CACamViewController()
         let tabbarVC = UITabBarController()
         camVC.tabBarItem = UITabBarItem(title: "Cam", image: nil, selectedImage: nil)
-        let openglVC = CAOpenGLViewController()
-        openglVC.tabBarItem = UITabBarItem(title: "OpenGL", image: nil, selectedImage: nil)
-        
-        tabbarVC.viewControllers = [openglVC, camVC]
+//        let openglVC = CAOpenGLViewController()
+//        openglVC.tabBarItem = UITabBarItem(title: "OpenGL", image: nil, selectedImage: nil)
+        let caVC = CA0419ViewController()
+        caVC.tabBarItem = UITabBarItem(title: "CAVC", image: nil, selectedImage: nil)
+        tabbarVC.viewControllers = [caVC]
         window?.rootViewController = tabbarVC
         window?.makeKeyAndVisible()
         return true
