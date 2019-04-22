@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F1106F69226DA3B0002B0E26 /* vertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F1106F68226DA3B0002B0E26 /* vertexShader.vsh */; };
+		F1106F6B226DA3C4002B0E26 /* fragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F1106F6A226DA3C4002B0E26 /* fragmentShader.fsh */; };
 		F1C3B934226C5286005D8BC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B933226C5286005D8BC0 /* AppDelegate.swift */; };
 		F1C3B936226C5286005D8BC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B935226C5286005D8BC0 /* ViewController.swift */; };
 		F1C3B939226C5286005D8BC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B937226C5286005D8BC0 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F1106F68226DA3B0002B0E26 /* vertexShader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexShader.vsh; sourceTree = "<group>"; };
+		F1106F6A226DA3C4002B0E26 /* fragmentShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragmentShader.fsh; sourceTree = "<group>"; };
 		F1C3B930226C5286005D8BC0 /* MYOpenGLDemo02.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYOpenGLDemo02.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1C3B933226C5286005D8BC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1C3B935226C5286005D8BC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +82,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F1106F67226DA390002B0E26 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				F1106F68226DA3B0002B0E26 /* vertexShader.vsh */,
+				F1106F6A226DA3C4002B0E26 /* fragmentShader.fsh */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
 		F1C3B927226C5285005D8BC0 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +114,7 @@
 		F1C3B932226C5286005D8BC0 /* MYOpenGLDemo02 */ = {
 			isa = PBXGroup;
 			children = (
+				F1106F67226DA390002B0E26 /* Shader */,
 				F1C3B933226C5286005D8BC0 /* AppDelegate.swift */,
 				F1C3B935226C5286005D8BC0 /* ViewController.swift */,
 				F1C3B961226C53E5005D8BC0 /* MYOpneGLView.swift */,
@@ -235,6 +249,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1106F69226DA3B0002B0E26 /* vertexShader.vsh in Resources */,
+				F1106F6B226DA3C4002B0E26 /* fragmentShader.fsh in Resources */,
 				F1C3B93E226C5288005D8BC0 /* LaunchScreen.storyboard in Resources */,
 				F1C3B93B226C5288005D8BC0 /* Assets.xcassets in Resources */,
 				F1C3B939226C5286005D8BC0 /* Main.storyboard in Resources */,
