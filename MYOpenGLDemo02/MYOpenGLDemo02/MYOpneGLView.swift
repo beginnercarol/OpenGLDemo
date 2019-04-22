@@ -10,6 +10,8 @@ import GLKit
 
 class MYOpneGLView: GLKView {
     private var vertices: [Vertex]!
+    private var indices: [GLubyte]!
+    
     private var vao = GLuint()
     private var vbo = GLuint()
     private var ebo = GLuint()
@@ -34,7 +36,7 @@ class MYOpneGLView: GLKView {
         }
         self.context = ctx
         EAGLContext.setCurrent(self.context)
-        self.clear()
+//        self.clear()
     }
     
     func render() {
@@ -42,9 +44,16 @@ class MYOpneGLView: GLKView {
         glBindVertexArrayOES(vao)
         
         self.vertices = [
-            Vertex(x: 0.5, y: 0.0, z: 0.0, r: 1, g: 0, b: 0, a: 1.0, textureX: 1.0, textureY: 0.0),
+            Vertex(x: 0.5, y: -0.5, z: 0.0, r: 1, g: 0, b: 0, a: 1.0, textureX: 1.0, textureY: 0.0),
+            Vertex(x: 0.5, y: 0.5, z: 0.0, r: 0, g: 0, b: 1, a: 1.0,textureX: 1.0, textureY: 1.0),
             Vertex(x: -0.5, y: 0.5, z: 0.0, r: 0, g: 1, b: 0, a: 1.0,textureX: 0.0, textureY: 1.0),
-            Vertex(x: -0.5, y: 0.0, z: 0.0, r: 0, g: 0, b: 1, a: 1.0,textureX: 0.0, textureY: 0.0),
+            Vertex(x: -0.5, y: -0.5, z: 0.0, r: 0, g: 0, b: 1, a: 1.0,textureX: 0.0, textureY: 0.0),
+        ]
+        
+        
+        self.indices = [
+            0, 1, 2,
+            2, 3, 0
         ]
         
         glGenBuffers(1, &vbo)
@@ -52,20 +61,25 @@ class MYOpneGLView: GLKView {
         glBufferData(GLenum(GL_ARRAY_BUFFER), self.vertices.size(), self.vertices, GLenum(GL_STATIC_DRAW))
         
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.position.rawValue))
-        let strideOfVertex = self.vertices.size()
+        //        let strideOfVertex = self.vertices.size() // 有问题
+        let strideOfVertex = MemoryLayout<Vertex>.stride // 长度算错了
         glVertexAttribPointer(GLuint(GLKVertexAttrib.position.rawValue), 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(strideOfVertex), nil)
         let coordOffset = 7*MemoryLayout<GLfloat>.stride
         var coordOffsetPointer = UnsafeRawPointer(bitPattern: coordOffset)
-
         
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
         glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue), 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(strideOfVertex), coordOffsetPointer)
         
         let colorOffsetPointer = UnsafeRawPointer(bitPattern: 3*MemoryLayout<GLfloat>.stride)
-        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.color.rawValue))
-        glVertexAttribPointer(GLuint(GLKVertexAttrib.color.rawValue), 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(strideOfVertex), coordOffsetPointer)
+//        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.color.rawValue))
+//        glVertexAttribPointer(GLuint(GLKVertexAttrib.color.rawValue), 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(strideOfVertex), coordOffsetPointer)
         
+        glGenBuffers(1, &ebo)
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), ebo)
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), self.indices.size(), self.indices, GLenum(GL_STATIC_DRAW))
         
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0)
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0)
         glBindVertexArrayOES(0)
     }
     
@@ -109,7 +123,7 @@ class MYOpneGLView: GLKView {
         bitmap.draw(img, in: CGRect(x: 0, y: 0, width: imgWidth, height: imgHeight))
         
         var texture = GLuint()
-//        glBindVertexArrayOES(vao)
+        glBindVertexArrayOES(vao)
         glGenTextures(1, &texture)
         glBindTexture(GLenum(GL_TEXTURE_2D), texture)
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
@@ -118,9 +132,8 @@ class MYOpneGLView: GLKView {
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
         
         glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GLint(GL_RGBA), GLsizei(imgWidth), GLsizei(imgHeight), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), &imgData)
-//        glBindTexture(GLenum(GL_TEXTURE_2D), 0)
-//        glBindVertexArrayOES(0)
-        
+        glBindTexture(GLenum(GL_TEXTURE_2D), 0)
+        glBindVertexArrayOES(0)
     }
     
     func clear() {
@@ -145,11 +158,13 @@ class MYOpneGLView: GLKView {
 
 extension MYOpneGLView: GLKViewDelegate {
     func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        clear()
-        uploadTexture(withName: "test")
+        glClearColor(0.85, 0.85, 0.85, 1.0)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        uploadTexture()
         effect.prepareToDraw()
         glBindVertexArrayOES(vao)
-        glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(self.vertices.count))
+//        glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(self.vertices.count))
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(self.indices.count), GLenum(GL_UNSIGNED_BYTE), self.indices)
         glBindVertexArrayOES(0)
     }
 }
