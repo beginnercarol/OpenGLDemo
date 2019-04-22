@@ -162,6 +162,7 @@ extension CAGLKView: GLKViewDelegate {
         effect.prepareToDraw()
         glBindVertexArrayOES(vao)
         glDrawArrays(GLenum(GL_TRIANGLES), 0, 3)
+        glBindVertexArrayOES(0)
     }
 }
 
