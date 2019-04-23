@@ -17,9 +17,16 @@ class MYOpneGLView: GLKView {
     private var ebo = GLuint()
     private var textureBuffer = GLuint()
     
+    private var texture0Info = GLKTextureInfo()
+    private var texture1Info = GLKTextureInfo()
+    
     private var effect = GLKBaseEffect()
     
     private var shaderProgram = GLuint()
+    
+    
+    
+//    private var
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,50 +80,43 @@ class MYOpneGLView: GLKView {
         glEnableVertexAttribArray(GLuint(GLKVertexAttrib.texCoord0.rawValue))
         glVertexAttribPointer(GLuint(GLKVertexAttrib.texCoord0.rawValue), 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(strideOfVertex), coordOffsetPointer)
         
-//        let colorOffsetPointer = UnsafeRawPointer(bitPattern: 3*MemoryLayout<GLfloat>.stride)
+        let colorOffsetPointer = UnsafeRawPointer(bitPattern: 3*MemoryLayout<GLfloat>.stride)
 //        glEnableVertexAttribArray(GLuint(GLKVertexAttrib.color.rawValue))
-//        glVertexAttribPointer(GLuint(GLKVertexAttrib.color.rawValue), 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(strideOfVertex), coordOffsetPointer)
+        glVertexAttribPointer(GLuint(GLKVertexAttrib.color.rawValue), 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(strideOfVertex), coordOffsetPointer)
         
         // 怎么 ebo 注释了也能画????
         glGenBuffers(1, &ebo)
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), ebo)
         glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), self.indices.size(), self.indices, GLenum(GL_STATIC_DRAW))
         
-        uploadTexture(withName: "talk")
-        
-        
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0)
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0)
         glBindVertexArrayOES(0)
+        
+//        setupShader()
+//        glLinkProgram(self.shaderProgram)
+//        var linkSuccess = GLint()
+//        glGetProgramiv(self.shaderProgram, GLenum(GL_LINK_STATUS), &linkSuccess)
+//        
+//        if linkSuccess == GL_FALSE {
+//            var message = [CChar](repeating: CChar(0), count: 256)
+//            glGetProgramInfoLog(self.shaderProgram, GLsizei(message.count), nil, &message)
+//            let infoMsg = String.init(utf8String: message)
+//            NSLog("Link program failed: \(infoMsg)")
+//        }
     }
     
     override func layoutSubviews() {
         self.setupContext()
         self.render()
+        self.blendTextures()
     }
     
-    func setupShader() {
-        guard let vertexShaderPath = Bundle.main.path(forResource: "vertexShader", ofType: "vsh"), let fragmentShaderPath = Bundle.main.path(forResource: "fragmentShader", ofType: "fsh") else {
-            NSLog("Load vertexShader failed")
-            return
-        }
+    // - MARK: set up views and buttons
+    func setupViews() {
         
-        self.shaderProgram = self.loadShaders(vertexShaderPath, andFrag: fragmentShaderPath)
-        
-        var rotate = glGetUniformLocation(self.shaderProgram, "rotateMatrix")
-        let radians: GLfloat = 10 * 3.14159 / 180.0
-        let sinAng: GLfloat = sin(radians)
-        let cosAng: GLfloat = cos(radians)
-        
-        let zRotation: [GLfloat] = [
-            cosAng, sinAng, 0, 0,
-            -sinAng, cosAng, 0, 0,
-            0, 0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0,
-            ]
-        var rotationSize = GLfloat(zRotation.size())
-        glUniformMatrix4fv(rotate, 1, GLboolean(GL_FALSE), zRotation)
     }
+    
     
     func uploadTexture() {
         guard let ciImg = UIImage(named: "talk")?.cgImage else {
@@ -134,7 +134,6 @@ class MYOpneGLView: GLKView {
         } catch let err {
             NSLog("Error occured when load texture: \(err)")
         }
-  
     }
     
     // 仅仅为了演示 opengl core graphics 交互 实际上使用 loader 就可以了
@@ -158,19 +157,18 @@ class MYOpneGLView: GLKView {
         
         
         bitmap.draw(img, in: CGRect(x: 0, y: 0, width: imgWidth, height: imgHeight))
-        
-//        glEnable(GLenum(GL_TEXTURE_2D))
+
         glGenTextures(1, &textureBuffer)
         glBindTexture(GLenum(GL_TEXTURE_2D), textureBuffer)
         
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_NEAREST)
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT)
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT)
         
          glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GLint(GL_RGBA), GLsizei(imgWidth), GLsizei(imgHeight), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), &imgData)
         
-        // 针对 这个函数 切记 只是为了演示 
+        // 针对 这个函数 切记 只是为了演示
         effect.texture2d0.enabled = GLboolean(GL_TRUE)
         effect.texture2d0.name = textureBuffer
         effect.texture2d0.target = GLKTextureTarget(rawValue: GLenum(GL_TEXTURE_2D))!
@@ -199,6 +197,29 @@ class MYOpneGLView: GLKView {
     }
     
     // - MARK: Shaders
+    func setupShader() {
+        guard let vertexShaderPath = Bundle.main.path(forResource: "vertexShader", ofType: "vsh"), let fragmentShaderPath = Bundle.main.path(forResource: "fragmentShader", ofType: "fsh") else {
+            NSLog("Load vertexShader failed")
+            return
+        }
+        
+        self.shaderProgram = self.loadShaders(vertexShaderPath, andFrag: fragmentShaderPath)
+        
+        var rotate = glGetUniformLocation(self.shaderProgram, "rotateMatrix")
+        let radians: GLfloat = 10 * 3.14159 / 180.0
+        let sinAng: GLfloat = sin(radians)
+        let cosAng: GLfloat = cos(radians)
+        
+        let zRotation: [GLfloat] = [
+            cosAng, sinAng, 0, 0,
+            -sinAng, cosAng, 0, 0,
+            0, 0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0,
+            ]
+        var rotationSize = GLfloat(zRotation.size())
+        glUniformMatrix4fv(rotate, 1, GLboolean(GL_FALSE), zRotation)
+    }
+    
     func loadShaders(_ vertex: String, andFrag frag: String?) -> GLuint {
         var vertexShader = glCreateShader(GLenum(GL_VERTEX_SHADER))
         var fragmentShader = glCreateShader(GLenum(GL_FRAGMENT_SHADER))
@@ -238,18 +259,55 @@ class MYOpneGLView: GLKView {
         }
     }
     
+    // - MARK: Blend
+    func blendTextures() {
+        
+        let options = [GLKTextureLoaderOriginBottomLeft: NSNumber(value: 1)]
+        guard let ciImgBase = UIImage(named: "leaves.gif")?.cgImage, let ciImageBlend = UIImage(named: "beetle.png")?.cgImage else {
+            NSLog("CIImage load failed.")
+            return
+        }
+        do {
+            self.texture0Info = try GLKTextureLoader.texture(with: ciImgBase, options: options)
+//            effect.texture2d0.name = texture0Info.name
+//            effect.texture2d0.target = GLKTextureTarget(rawValue: texture0Info.target)!
+//
+            self.texture1Info = try GLKTextureLoader.texture(with: ciImageBlend, options: options)
+//            effect.texture2d0.name = texture1Info.name
+//            effect.texture2d0.target = GLKTextureTarget(rawValue: texture1Info.target)!
+            
+//            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
+//            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_NEAREST)
+//            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE)
+//            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
+            
+            glEnable(GLenum(GL_BLEND))
+            glBlendFunc(GLenum(GL_SRC_ALPHA), GLenum(GL_ONE_MINUS_SRC_ALPHA))
+        } catch let err {
+            NSLog("Texture Failed: \(err)")
+        }
+    }
 }
 
 extension MYOpneGLView: GLKViewDelegate {
     func glkView(_ view: GLKView, drawIn rect: CGRect) {
         glClearColor(0.85, 0.85, 0.85, 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-        uploadTexture(withName: "talk")
+//        uploadTexture(withName: "talk")
         
 //        uploadTexture()
+        effect.texture2d0.name = self.texture0Info.name
+        effect.texture2d0.target = GLKTextureTarget(rawValue: self.texture0Info.target)!
         effect.prepareToDraw()
         glBindVertexArrayOES(vao)
 //        glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(self.vertices.count))
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(self.indices.count), GLenum(GL_UNSIGNED_BYTE), self.indices)
+        glBindVertexArrayOES(0)
+        
+        effect.texture2d0.name = self.texture1Info.name
+        effect.texture2d0.target = GLKTextureTarget(rawValue: self.texture1Info.target)!
+        effect.prepareToDraw()
+        glBindVertexArrayOES(vao)
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(self.indices.count), GLenum(GL_UNSIGNED_BYTE), self.indices)
         
         // 这句话啥意思? 将当前 render buffer 上的内容 呈现在屏幕上.

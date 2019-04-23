@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.320964"
+            timestampString = "577678733.74663"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "dealloc()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.321943"
+            timestampString = "577678733.74742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "dealloc()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.322415"
+            timestampString = "577678733.747789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "127"
@@ -79,11 +79,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.322841"
+            timestampString = "577678733.7481461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "uploadTexture(withName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -95,11 +95,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.3232419"
+            timestampString = "577678733.7484699"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "uploadTexture(withName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -111,11 +111,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.3236541"
+            timestampString = "577678733.748785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "uploadTexture(withName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -127,11 +127,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.324007"
+            timestampString = "577678733.749082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "uploadTexture(withName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -143,28 +143,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.324347"
+            timestampString = "577678733.749369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "glkView(_:drawIn:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MYOpenGLDemo02/MYOpneGLView.swift"
-            timestampString = "577628583.324683"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "layoutSubviews()"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
+            landmarkName = "blendTextures()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

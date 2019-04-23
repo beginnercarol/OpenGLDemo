@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		F1106F69226DA3B0002B0E26 /* vertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F1106F68226DA3B0002B0E26 /* vertexShader.vsh */; };
 		F1106F6B226DA3C4002B0E26 /* fragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F1106F6A226DA3C4002B0E26 /* fragmentShader.fsh */; };
+		F1106F6E226EA367002B0E26 /* beetle.png in Resources */ = {isa = PBXBuildFile; fileRef = F1106F6D226EA367002B0E26 /* beetle.png */; };
+		F1106F70226EA36E002B0E26 /* leaves.gif in Resources */ = {isa = PBXBuildFile; fileRef = F1106F6F226EA36E002B0E26 /* leaves.gif */; };
+		F1106F72226EA657002B0E26 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1106F71226EA657002B0E26 /* ImageResize.swift */; };
 		F1C3B934226C5286005D8BC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B933226C5286005D8BC0 /* AppDelegate.swift */; };
 		F1C3B936226C5286005D8BC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3B935226C5286005D8BC0 /* ViewController.swift */; };
 		F1C3B939226C5286005D8BC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1C3B937226C5286005D8BC0 /* Main.storyboard */; };
@@ -40,6 +43,9 @@
 /* Begin PBXFileReference section */
 		F1106F68226DA3B0002B0E26 /* vertexShader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexShader.vsh; sourceTree = "<group>"; };
 		F1106F6A226DA3C4002B0E26 /* fragmentShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragmentShader.fsh; sourceTree = "<group>"; };
+		F1106F6D226EA367002B0E26 /* beetle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beetle.png; path = "../../../../Downloads/Code/Learning-OpenGL-ES-for-iOS-master/Resources/beetle.png"; sourceTree = "<group>"; };
+		F1106F6F226EA36E002B0E26 /* leaves.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = leaves.gif; path = "../../../../Downloads/Code/Learning-OpenGL-ES-for-iOS-master/Resources/leaves.gif"; sourceTree = "<group>"; };
+		F1106F71226EA657002B0E26 /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
 		F1C3B930226C5286005D8BC0 /* MYOpenGLDemo02.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MYOpenGLDemo02.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1C3B933226C5286005D8BC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1C3B935226C5286005D8BC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +97,15 @@
 			path = Shader;
 			sourceTree = "<group>";
 		};
+		F1106F6C226E9D40002B0E26 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1106F6D226EA367002B0E26 /* beetle.png */,
+				F1106F6F226EA36E002B0E26 /* leaves.gif */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F1C3B927226C5285005D8BC0 = {
 			isa = PBXGroup;
 			children = (
@@ -114,11 +129,13 @@
 		F1C3B932226C5286005D8BC0 /* MYOpenGLDemo02 */ = {
 			isa = PBXGroup;
 			children = (
+				F1106F6C226E9D40002B0E26 /* Supporting Files */,
 				F1106F67226DA390002B0E26 /* Shader */,
 				F1C3B933226C5286005D8BC0 /* AppDelegate.swift */,
 				F1C3B935226C5286005D8BC0 /* ViewController.swift */,
 				F1C3B961226C53E5005D8BC0 /* MYOpneGLView.swift */,
 				F1C3B963226C5516005D8BC0 /* Vertex.swift */,
+				F1106F71226EA657002B0E26 /* ImageResize.swift */,
 				F1C3B937226C5286005D8BC0 /* Main.storyboard */,
 				F1C3B93A226C5288005D8BC0 /* Assets.xcassets */,
 				F1C3B93C226C5288005D8BC0 /* LaunchScreen.storyboard */,
@@ -249,8 +266,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1106F6E226EA367002B0E26 /* beetle.png in Resources */,
 				F1106F69226DA3B0002B0E26 /* vertexShader.vsh in Resources */,
 				F1106F6B226DA3C4002B0E26 /* fragmentShader.fsh in Resources */,
+				F1106F70226EA36E002B0E26 /* leaves.gif in Resources */,
 				F1C3B93E226C5288005D8BC0 /* LaunchScreen.storyboard in Resources */,
 				F1C3B93B226C5288005D8BC0 /* Assets.xcassets in Resources */,
 				F1C3B939226C5286005D8BC0 /* Main.storyboard in Resources */,
@@ -278,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1106F72226EA657002B0E26 /* ImageResize.swift in Sources */,
 				F1C3B936226C5286005D8BC0 /* ViewController.swift in Sources */,
 				F1C3B964226C5516005D8BC0 /* Vertex.swift in Sources */,
 				F1C3B934226C5286005D8BC0 /* AppDelegate.swift in Sources */,
