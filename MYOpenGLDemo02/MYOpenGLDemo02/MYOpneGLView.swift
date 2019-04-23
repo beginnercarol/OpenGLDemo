@@ -93,23 +93,25 @@ class MYOpneGLView: GLKView {
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0)
         glBindVertexArrayOES(0)
         
-//        setupShader()
-//        glLinkProgram(self.shaderProgram)
-//        var linkSuccess = GLint()
-//        glGetProgramiv(self.shaderProgram, GLenum(GL_LINK_STATUS), &linkSuccess)
-//        
-//        if linkSuccess == GL_FALSE {
-//            var message = [CChar](repeating: CChar(0), count: 256)
-//            glGetProgramInfoLog(self.shaderProgram, GLsizei(message.count), nil, &message)
-//            let infoMsg = String.init(utf8String: message)
-//            NSLog("Link program failed: \(infoMsg)")
-//        }
+        setupShader()
+        glLinkProgram(self.shaderProgram)
+        var linkSuccess = GLint()
+        glGetProgramiv(self.shaderProgram, GLenum(GL_LINK_STATUS), &linkSuccess)
+        
+        if linkSuccess == GL_FALSE {
+            var message = [CChar](repeating: CChar(0), count: 256)
+            glGetProgramInfoLog(self.shaderProgram, GLsizei(message.count), nil, &message)
+            let infoMsg = String.init(utf8String: message)
+            NSLog("Link program failed: \(infoMsg)")
+        }
     }
+    
+    
     
     override func layoutSubviews() {
         self.setupContext()
         self.render()
-        self.blendTextures()
+//        self.blendTextures()
     }
     
     // - MARK: set up views and buttons
@@ -176,7 +178,6 @@ class MYOpneGLView: GLKView {
         glBindTexture(GLenum(GL_TEXTURE_2D), 0)
     }
     
-    
     func clear() {
         glClearColor(0.85, 0.85, 0.85, 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
@@ -205,19 +206,6 @@ class MYOpneGLView: GLKView {
         
         self.shaderProgram = self.loadShaders(vertexShaderPath, andFrag: fragmentShaderPath)
         
-        var rotate = glGetUniformLocation(self.shaderProgram, "rotateMatrix")
-        let radians: GLfloat = 10 * 3.14159 / 180.0
-        let sinAng: GLfloat = sin(radians)
-        let cosAng: GLfloat = cos(radians)
-        
-        let zRotation: [GLfloat] = [
-            cosAng, sinAng, 0, 0,
-            -sinAng, cosAng, 0, 0,
-            0, 0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0,
-            ]
-        var rotationSize = GLfloat(zRotation.size())
-        glUniformMatrix4fv(rotate, 1, GLboolean(GL_FALSE), zRotation)
     }
     
     func loadShaders(_ vertex: String, andFrag frag: String?) -> GLuint {
@@ -232,6 +220,11 @@ class MYOpneGLView: GLKView {
         var program = glCreateProgram()
         glAttachShader(program, vertexShader)
         glAttachShader(program, fragmentShader)
+        
+        // vertex shader 的 attribute 绑定
+        glBindAttribLocation(program, GLuint(GLKVertexAttrib.position.rawValue), "position")
+        glBindAttribLocation(program, GLuint(GLKVertexAttrib.texCoord0.rawValue), "textCoordinate")
+        
         glLinkProgram(program)
         
         glDeleteShader(vertexShader)
@@ -259,6 +252,8 @@ class MYOpneGLView: GLKView {
         }
     }
     
+    
+    
     // - MARK: Blend
     func blendTextures() {
         
@@ -269,17 +264,13 @@ class MYOpneGLView: GLKView {
         }
         do {
             self.texture0Info = try GLKTextureLoader.texture(with: ciImgBase, options: options)
-//            effect.texture2d0.name = texture0Info.name
-//            effect.texture2d0.target = GLKTextureTarget(rawValue: texture0Info.target)!
-//
-            self.texture1Info = try GLKTextureLoader.texture(with: ciImageBlend, options: options)
-//            effect.texture2d0.name = texture1Info.name
-//            effect.texture2d0.target = GLKTextureTarget(rawValue: texture1Info.target)!
             
-//            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
-//            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_NEAREST)
-//            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE)
-//            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
+            self.texture1Info = try GLKTextureLoader.texture(with: ciImageBlend, options: options)
+            
+            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
+            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_NEAREST)
+            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE)
+            glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE)
             
             glEnable(GLenum(GL_BLEND))
             glBlendFunc(GLenum(GL_SRC_ALPHA), GLenum(GL_ONE_MINUS_SRC_ALPHA))
@@ -293,25 +284,67 @@ extension MYOpneGLView: GLKViewDelegate {
     func glkView(_ view: GLKView, drawIn rect: CGRect) {
         glClearColor(0.85, 0.85, 0.85, 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-//        uploadTexture(withName: "talk")
-        
-//        uploadTexture()
+//        drawBlendTexture()
+//        drawWithTexture()
+        drawWithProgram()
+    }
+    
+    func drawWithTexture() {
+        uploadTexture(withName: "talk")
+        effect.prepareToDraw()
+        glBindVertexArrayOES(vao)
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(self.indices.count), GLenum(GL_UNSIGNED_BYTE), self.indices)
+        // 这句话啥意思? 将当前 render buffer 上的内容 呈现在屏幕上.
+        //        self.context.presentRenderbuffer(Int(GL_RENDERBUFFER))
+        glBindVertexArrayOES(0)
+    }
+    
+    func drawBlendTexture() {
         effect.texture2d0.name = self.texture0Info.name
         effect.texture2d0.target = GLKTextureTarget(rawValue: self.texture0Info.target)!
         effect.prepareToDraw()
+        
         glBindVertexArrayOES(vao)
-//        glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(self.vertices.count))
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(self.indices.count), GLenum(GL_UNSIGNED_BYTE), self.indices)
         glBindVertexArrayOES(0)
-        
         effect.texture2d0.name = self.texture1Info.name
         effect.texture2d0.target = GLKTextureTarget(rawValue: self.texture1Info.target)!
         effect.prepareToDraw()
         glBindVertexArrayOES(vao)
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(self.indices.count), GLenum(GL_UNSIGNED_BYTE), self.indices)
-        
-        // 这句话啥意思? 将当前 render buffer 上的内容 呈现在屏幕上.
-//        self.context.presentRenderbuffer(Int(GL_RENDERBUFFER))
         glBindVertexArrayOES(0)
+    }
+    
+    func drawWithProgram() {
+        glUseProgram(self.shaderProgram)
+        uniformOfShaders()
+        effect.prepareToDraw()
+        glBindVertexArrayOES(vao)
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(self.indices.count), GLenum(GL_UNSIGNED_BYTE), self.indices)
+        glBindVertexArrayOES(0)
+    }
+    // 传入 shader 中的 uniform 参数
+    func uniformOfShaders() {
+        
+        var rotate = glGetUniformLocation(self.shaderProgram, "rotateMatrix")
+        let radians: GLfloat = 90 * 3.14159 / 180.0
+        let sinAng: GLfloat = sin(radians)
+        let cosAng: GLfloat = cos(radians)
+        
+        let zRotation: [GLfloat] = [
+            cosAng, -sinAng, 0, 0.2,
+            sinAng, cosAng, 0, 0,
+            0, 0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0,
+            ]
+        var rotationSize = GLfloat(zRotation.size())
+        glUniformMatrix4fv(rotate, 1, GLboolean(GL_FALSE), zRotation)
+        
+        
+        var colorMap = glGetUniformLocation(self.shaderProgram, "colorMap")
+        
+        self.uploadTexture(withName: "leaves.gif")
+        
+        glUniform1i(colorMap, GLint(self.textureBuffer))
     }
 }
