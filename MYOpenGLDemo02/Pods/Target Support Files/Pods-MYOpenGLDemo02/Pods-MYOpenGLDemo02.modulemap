@@ -1,0 +1,6 @@
+module Pods_MYOpenGLDemo02 {
+  umbrella header "Pods-MYOpenGLDemo02-umbrella.h"
+
+  export *
+  module * { export * }
+}

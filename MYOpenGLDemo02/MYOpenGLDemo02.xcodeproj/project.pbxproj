@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BDD2F8AC060B86DA015A9757 /* libPods-MYOpenGLDemo02.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C888EA228C884ADA64F514BF /* libPods-MYOpenGLDemo02.a */; };
 		F1106F69226DA3B0002B0E26 /* vertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F1106F68226DA3B0002B0E26 /* vertexShader.vsh */; };
 		F1106F6B226DA3C4002B0E26 /* fragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F1106F6A226DA3C4002B0E26 /* fragmentShader.fsh */; };
 		F1106F6E226EA367002B0E26 /* beetle.png in Resources */ = {isa = PBXBuildFile; fileRef = F1106F6D226EA367002B0E26 /* beetle.png */; };
@@ -41,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		556AAF2903FD58C10E03B248 /* Pods-MYOpenGLDemo02.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MYOpenGLDemo02.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MYOpenGLDemo02/Pods-MYOpenGLDemo02.debug.xcconfig"; sourceTree = "<group>"; };
+		B26A0CE2B68E562AE7E58884 /* Pods-MYOpenGLDemo02.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MYOpenGLDemo02.release.xcconfig"; path = "Pods/Target Support Files/Pods-MYOpenGLDemo02/Pods-MYOpenGLDemo02.release.xcconfig"; sourceTree = "<group>"; };
+		C888EA228C884ADA64F514BF /* libPods-MYOpenGLDemo02.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MYOpenGLDemo02.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1106F68226DA3B0002B0E26 /* vertexShader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexShader.vsh; sourceTree = "<group>"; };
 		F1106F6A226DA3C4002B0E26 /* fragmentShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fragmentShader.fsh; sourceTree = "<group>"; };
 		F1106F6D226EA367002B0E26 /* beetle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beetle.png; path = "../../../../Downloads/Code/Learning-OpenGL-ES-for-iOS-master/Resources/beetle.png"; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD2F8AC060B86DA015A9757 /* libPods-MYOpenGLDemo02.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C4B30E5414ECBA781FB65C6F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C888EA228C884ADA64F514BF /* libPods-MYOpenGLDemo02.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F1106F67226DA390002B0E26 /* Shader */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +126,8 @@
 				F1C3B947226C5289005D8BC0 /* MYOpenGLDemo02Tests */,
 				F1C3B952226C5289005D8BC0 /* MYOpenGLDemo02UITests */,
 				F1C3B931226C5286005D8BC0 /* Products */,
+				FBD105D56BC4053B2CCCDFF2 /* Pods */,
+				C4B30E5414ECBA781FB65C6F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +177,15 @@
 			path = MYOpenGLDemo02UITests;
 			sourceTree = "<group>";
 		};
+		FBD105D56BC4053B2CCCDFF2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				556AAF2903FD58C10E03B248 /* Pods-MYOpenGLDemo02.debug.xcconfig */,
+				B26A0CE2B68E562AE7E58884 /* Pods-MYOpenGLDemo02.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,6 +193,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1C3B958226C5289005D8BC0 /* Build configuration list for PBXNativeTarget "MYOpenGLDemo02" */;
 			buildPhases = (
+				192863C5D6AECAF759FB452E /* [CP] Check Pods Manifest.lock */,
 				F1C3B92C226C5286005D8BC0 /* Sources */,
 				F1C3B92D226C5286005D8BC0 /* Frameworks */,
 				F1C3B92E226C5286005D8BC0 /* Resources */,
@@ -291,6 +316,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		192863C5D6AECAF759FB452E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MYOpenGLDemo02-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F1C3B92C226C5286005D8BC0 /* Sources */ = {
@@ -474,6 +524,7 @@
 		};
 		F1C3B959226C5289005D8BC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 556AAF2903FD58C10E03B248 /* Pods-MYOpenGLDemo02.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -493,6 +544,7 @@
 		};
 		F1C3B95A226C5289005D8BC0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B26A0CE2B68E562AE7E58884 /* Pods-MYOpenGLDemo02.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

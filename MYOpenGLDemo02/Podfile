@@ -1,0 +1,9 @@
+# Uncomment this line to define a global platform for your project
+
+platform :ios, '11.0'
+use_modular_headers!
+
+target 'MYOpenGLDemo02' do
+  pod 'PromisesSwift', '~> 1.2.7'
+end
+

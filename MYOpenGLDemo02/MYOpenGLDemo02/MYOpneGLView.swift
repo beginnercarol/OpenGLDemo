@@ -7,6 +7,7 @@
 //
 
 import GLKit
+import Promises
 
 class MYOpneGLView: GLKView {
     private var vertices: [Vertex]!
